@@ -13,6 +13,8 @@ Aplikasi web kasir yang **cepat di meja kasir, mudah dipahami pemilik toko, dan 
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-22C55E.svg)](LICENSE)
 
+### [🔗 Lihat Demo Langsung](https://kasentra-production.up.railway.app)
+
 </div>
 
 ---
