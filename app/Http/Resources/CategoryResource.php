@@ -12,6 +12,7 @@ class CategoryResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'products_count' => $this->whenCounted('products'),
         ];
     }
 }

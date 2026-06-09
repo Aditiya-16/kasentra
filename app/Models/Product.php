@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[Fillable(['category_id', 'name', 'sku', 'price', 'stock', 'image', 'is_active'])]
 class Product extends Model
@@ -27,6 +28,12 @@ class Product extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    /** Baris transaksi yang merujuk produk ini (untuk cek aman-hapus). */
+    public function transactionItems(): HasMany
+    {
+        return $this->hasMany(TransactionItem::class);
     }
 
     /** True bila stok sudah di bawah ambang dan perlu diisi ulang. */

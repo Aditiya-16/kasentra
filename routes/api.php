@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\SettingController;
 use App\Http\Controllers\Api\TransactionController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,4 +36,30 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Laporan (admin)
     Route::get('/reports/summary', [ReportController::class, 'summary']);
+
+    /*
+    | Pengelolaan — khusus admin (produk, kategori, pengguna, pengaturan).
+    | Update produk via POST (multipart konsisten untuk unggah foto).
+    */
+    Route::middleware('admin')->group(function () {
+        // Produk
+        Route::post('/products', [ProductController::class, 'store']);
+        Route::post('/products/{product}', [ProductController::class, 'update']);
+        Route::delete('/products/{product}', [ProductController::class, 'destroy']);
+
+        // Kategori
+        Route::post('/categories', [CategoryController::class, 'store']);
+        Route::put('/categories/{category}', [CategoryController::class, 'update']);
+        Route::delete('/categories/{category}', [CategoryController::class, 'destroy']);
+
+        // Pengguna
+        Route::get('/users', [UserController::class, 'index']);
+        Route::post('/users', [UserController::class, 'store']);
+        Route::put('/users/{user}', [UserController::class, 'update']);
+        Route::delete('/users/{user}', [UserController::class, 'destroy']);
+
+        // Pengaturan toko
+        Route::get('/settings', [SettingController::class, 'index']);
+        Route::post('/settings', [SettingController::class, 'update']);
+    });
 });

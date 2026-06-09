@@ -23,6 +23,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->redirectUsersTo(fn (Request $request) => $request->user()?->isAdmin()
             ? '/admin'
             : route('kasir'));
+
+        // Alias middleware: batasi endpoint pengelolaan API ke admin saja.
+        $middleware->alias([
+            'admin' => \App\Http\Middleware\EnsureAdmin::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
