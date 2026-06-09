@@ -26,7 +26,7 @@ class Cashier extends Component
      * 'price' & 'stock' hanya untuk tampilan; harga final divalidasi ulang
      * dari DB saat checkout (lihat CreateTransaction).
      *
-     * @var array<int, array{id:int,name:string,price:float,qty:int,stock:int}>
+     * @var array<int, array{id:int,name:string,price:float,qty:int,stock:int,image:?string,category:?string}>
      */
     public array $cart = [];
 
@@ -39,6 +39,7 @@ class Cashier extends Component
 
     /** State layar sukses + ringkasan transaksi terakhir untuk ditampilkan. */
     public bool $showSuccess = false;
+
     public ?array $lastTransaction = null;
 
     /**
@@ -50,7 +51,8 @@ class Cashier extends Component
     {
         $query = Product::query()
             ->where('is_active', true)
-            ->select(['id', 'name', 'sku', 'price', 'stock'])
+            ->select(['id', 'category_id', 'name', 'sku', 'price', 'stock', 'image'])
+            ->with('category:id,name')
             ->orderBy('name')
             ->limit(24);
 
@@ -108,6 +110,9 @@ class Cashier extends Component
             'price' => (float) $product->price,
             'qty' => $current + 1,
             'stock' => $product->stock,
+            // Hanya untuk tampilan thumbnail di keranjang.
+            'image' => $product->image,
+            'category' => $product->category?->name,
         ];
     }
 
@@ -117,7 +122,7 @@ class Cashier extends Component
             return;
         }
         $line = $this->cart[$productId];
-        if ($line['qty'] + 1 <= $line['stock']) {
+        if ($line['stock'] >= $line['qty'] + 1) {
             $this->cart[$productId]['qty']++;
         }
     }

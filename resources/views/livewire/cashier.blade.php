@@ -52,13 +52,31 @@
                         wire:key="prod-{{ $product->id }}"
                         @disabled($isOut)
                         wire:click="addToCart({{ $product->id }})"
-                        class="card flex flex-col items-start gap-1 p-3 text-left transition hover:-translate-y-0.5 hover:shadow-[var(--shadow-glow)] disabled:cursor-not-allowed disabled:opacity-50"
+                        class="card group relative flex flex-col items-stretch gap-2 p-2.5 text-left transition hover:-translate-y-0.5 hover:shadow-[var(--shadow-glow)] disabled:cursor-not-allowed disabled:opacity-50"
                     >
-                        <span class="line-clamp-2 text-sm font-semibold text-slate-800 dark:text-slate-100">{{ $product->name }}</span>
-                        <span class="text-brand-600 dark:text-brand-400 font-bold">{{ $rp($product->price) }}</span>
-                        <span class="badge {{ $product->stock < \App\Models\Product::LOW_STOCK_THRESHOLD ? 'bg-red-50 text-red-600 dark:bg-red-500/10 dark:text-red-400' : 'bg-slate-100 text-slate-500 dark:bg-white/5 dark:text-slate-400' }}">
-                            Stok: {{ $product->stock }}
-                        </span>
+                        <div class="relative">
+                            <x-product-thumb
+                                :id="$product->id"
+                                :name="$product->name"
+                                :image="$product->image"
+                                :category="$product->category?->name"
+                                rounded="rounded-lg"
+                            />
+                            @if ($isOut)
+                                <div class="absolute inset-0 grid place-items-center rounded-lg bg-slate-900/45 text-xs font-bold text-white">
+                                    Stok Habis
+                                </div>
+                            @endif
+                        </div>
+                        <div class="flex flex-col gap-0.5 px-0.5">
+                            <span class="line-clamp-2 text-sm font-semibold text-slate-800 dark:text-slate-100">{{ $product->name }}</span>
+                            <div class="flex items-center justify-between gap-1">
+                                <span class="text-brand-700 dark:text-brand-400 font-bold">{{ $rp($product->price) }}</span>
+                                <span class="text-xs font-semibold {{ $product->stock < \App\Models\Product::LOW_STOCK_THRESHOLD ? 'text-red-500' : 'text-slate-400' }}">
+                                    {{ $product->stock }}
+                                </span>
+                            </div>
+                        </div>
                     </button>
                 @empty
                     <div class="col-span-full rounded-xl border border-dashed border-slate-300 py-12 text-center text-slate-400 dark:border-white/10">
@@ -87,6 +105,15 @@
                 <div class="max-h-[40vh] overflow-y-auto p-4">
                     @forelse ($cart as $id => $item)
                         <div wire:key="cart-{{ $id }}" class="cart-row mb-2 flex items-center gap-3 rounded-xl bg-slate-50 p-2.5 dark:bg-white/5">
+                            <div class="h-10 w-10 shrink-0">
+                                <x-product-thumb
+                                    :id="$id"
+                                    :name="$item['name']"
+                                    :image="$item['image'] ?? null"
+                                    :category="$item['category'] ?? null"
+                                    rounded="rounded-lg"
+                                />
+                            </div>
                             <div class="min-w-0 flex-1">
                                 <p class="truncate text-sm font-medium text-slate-800 dark:text-slate-100">{{ $item['name'] }}</p>
                                 <p class="text-xs text-slate-500 dark:text-slate-400">{{ $rp($item['price']) }} × {{ $item['qty'] }}</p>
