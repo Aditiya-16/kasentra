@@ -186,7 +186,7 @@
                 <img src="{{ asset('images/logo.svg') }}" alt="Kasentra" class="h-8 w-auto dark:hidden">
                 <img src="{{ asset('images/logo-dark.svg') }}" alt="Kasentra" class="hidden h-8 w-auto dark:block">
             </div>
-            <p>© {{ date('Y') }} Kasentra. Sistem POS untuk toko ritel.</p>
+            <p>© {{ date('Y') }} aditiya-16 · Kasentra. Sistem POS untuk toko ritel.</p>
         </div>
     </footer>
 

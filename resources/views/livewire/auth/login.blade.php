@@ -18,7 +18,7 @@
                 </p>
             </div>
 
-            <p class="text-sm text-white/50">© {{ date('Y') }} Kasentra</p>
+            <p class="text-sm text-white/50">© {{ date('Y') }} aditiya-16 · Kasentra</p>
         </div>
     </div>
 
