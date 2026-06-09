@@ -6,11 +6,12 @@
 
 Catat produk, proses transaksi dalam hitungan detik, dan pantau penjualan tanpa hitung manual — untuk warung, toko kelontong, kedai, dan butik.
 
-[**Buka Demo Langsung →**](https://kasentra-production.up.railway.app)
+[**Buka Demo Langsung →**](https://kasentra-production.up.railway.app) · [**Aplikasi Mobile (Flutter) →**](https://github.com/Aditiya-16/Kasentra-app)
 
 [![Laravel](https://img.shields.io/badge/Laravel-13-FF2D20?logo=laravel&logoColor=white)](https://laravel.com)
 [![Filament](https://img.shields.io/badge/Filament-4-FDAE4B?logo=laravel&logoColor=white)](https://filamentphp.com)
 [![PHP](https://img.shields.io/badge/PHP-8.3-777BB4?logo=php&logoColor=white)](https://php.net)
+[![Mobile](https://img.shields.io/badge/Mobile-Kasentra--app-0D9488?logo=flutter&logoColor=white)](https://github.com/Aditiya-16/Kasentra-app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-22C55E.svg)](LICENSE)
 
 </div>
@@ -52,6 +53,12 @@ Demo berjalan di **[kasentra-production.up.railway.app](https://kasentra-product
 - Stok berkurang otomatis setiap transaksi; nomor invoice dibuat unik.
 - Cetak atau unduh struk PDF dengan format kertas termal 80mm.
 
+## Aplikasi Mobile
+
+Kasentra juga punya aplikasi **Android/iOS (Flutter)** yang memakai REST API yang sama (Sanctum) — kasir, riwayat, laporan, dan pengelolaan katalog langsung dari ponsel.
+
+➡️ **[github.com/Aditiya-16/Kasentra-app](https://github.com/Aditiya-16/Kasentra-app)**
+
 ## Teknologi
 
 - **Laravel 13** (PHP 8.3)
@@ -66,8 +73,8 @@ Demo berjalan di **[kasentra-production.up.railway.app](https://kasentra-product
 Prasyarat: PHP 8.3+ (dengan ekstensi `zip` dan `gd`), Composer, Node.js, dan MySQL — misalnya lewat [Laragon](https://laragon.org/).
 
 ```bash
-git clone https://github.com/Aditiya-16/kasentra.git
-cd kasentra
+git clone https://github.com/Aditiya-16/Kasentra-web.git
+cd Kasentra-web
 
 composer install
 npm install
